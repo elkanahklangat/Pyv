@@ -1,139 +1,122 @@
-# Pyv
+# Autonomous Flying Vehicle Platform
 
-Autonomous aerial delivery system for adaptive tea service, environmental learning, and precision wake-up assistance.
+Pyv is the physical and operational layer of the same autonomous mission architecture. It encapsulates the vehicle, control loops, trajectory behavior, and edge execution needed to fly, learn, and deliver in a dynamic environment.
 
-## Mission
+## Mission and System Role
 
-Pyv is a compact autonomous flying vehicle designed for a specific and elegant human-centered mission: it leaves before the occupant wakes, travels to a local restaurant or food point, collects tea and a prepared meal, and returns to wake the occupant at the right time with a calm and practical morning routine. The system does not merely fly; it understands context, learns the environment, and improves over time.
+Pyv is designed around a specific human-centered mission: it leaves before the user wakes, navigates to a local restaurant or food point, gathers tea and prepared food, returns home, and wakes the user with the tea ready at the right time.
 
-This project sits at the intersection of drone engineering, embodied AI, sensor fusion, and autonomous mission planning. It is a research-grade concept platform for adaptive flight and intelligent delivery in a constrained but realistic environment.
+This is not a toy flight concept. It is a research-grade autonomous aerial delivery stack that blends low-level hardware control, mission planning, and adaptive behavior.
 
-## System Vision
+## Integrated Stack
 
-The vehicle learns from its surroundings, adapts to local conditions, and becomes more capable as it repeats missions. Through reinforcement-style trial and error, it improves:
+The vehicle combines:
 
-- route planning
-- landing and takeoff stability
-- food retrieval coordination
-- navigation in dynamic environments
-- recovery from imperfect conditions
+- Arduino for low-level interface control and sensor handling
+- Raspberry Pi for local coordination and edge orchestration
+- Jetson Nano for heavier compute workloads, vision processing, and model inference
+- reinforcement-inspired learning loops for mission refinement
+- TensorFlow and computer vision support from the connected aimodels intelligence layer
 
-The long-term design goal is not just to move from point A to point B, but to become reliable, context-aware, and continuously improving over time.
-
-## Architecture
-
-Pyv is built as a layered autonomous vehicle platform with a tight connection between sensing, control, and intelligence.
+## System Architecture
 
 ```text
-Physical Vehicle Layer
-  ├─ airframe and propulsion
-  ├─ flight stabilization
-  ├─ motor and power management
-  └─ safety systems
+Vehicle / Control Layer
+  ├─ propulsion and stabilization
+  ├─ motor and power bus
+  ├─ telemetry and safety monitors
+  └─ flight state estimation
           │
           v
-Sensor and Signal Layer
-  ├─ IMU and motion sensing
-  ├─ vision and camera inputs
-  ├─ GPS and localization
-  ├─ environmental telemetry
-  └─ low-level edge devices
+Sensor and Edge Layer
+  ├─ IMU and environmental sensors
+  ├─ camera and perception hardware
+  ├─ route and target detection
+  └─ local compute and signal processing
           │
           v
-Compute and Intelligence Layer
-  ├─ Arduino for sensor interfaces and signal handling
-  ├─ Raspberry Pi for edge coordination and telemetry
-  ├─ Jetson Nano for vision and learning workloads
-  └─ adaptive model execution and mission logic
+Intelligence Layer
+  ├─ mission planning
+  ├─ reinforcement and adaptive logic
+  ├─ route optimization
+  └─ mission decisioning
           │
           v
-Mission Execution Layer
-  ├─ route decision
-  ├─ delivery planning
-  ├─ landing / pickup flow
-  └─ delivery-to-wake sequence
+Operational Layer
+  ├─ pickup target recognition
+  ├─ return-to-home logic
+  ├─ delivery timing
+  └─ user wake sequence
 ```
 
-## Core Hardware Components
+## Software Design
 
-### Embedded Sensing and Control
+The Pyv platform includes both embedded-style control logic and a higher-level mission runtime. It is intended to collaborate with the aimodels repository as a combined stack:
 
-- Arduino-based peripherals for low-level interfacing, timing, and control loops
-- Raspberry Pi for system orchestration, local telemetry, and lightweight task execution
-- Jetson Nano for compute-intensive perception, vision, and model inference
+- aimodels = perception, learning, and planning
+- Pyv = physical execution and flight behavior
 
-### Flight and Navigation Stack
+## C++ Control Runtime
 
-- stabilization and control loops
-- localized path following
-- environment-aware landing logic
-- waypoint tracking and mission sequencing
+The vehicle platform includes a C++ control component that models mission state, safety constraints, and route decisions. This is the execution side of the autonomous mission stack.
 
-### Perception and Learning
+The repository includes:
 
-- computer vision for target recognition and obstacle awareness
-- TensorFlow-based models for adaptive inference
-- TinyML components for low-power edge sensing and decision support
-- reinforcement-style feedback for mission improvement under uncertainty
+- `include/flight_controller.hpp`
+- `src/flight_controller.cpp`
+- `src/main.cpp`
+- `CMakeLists.txt`
 
-## Mission Profile
+These files provide a structured starting point for implementing an autonomous flight controller that can communicate with the mission intelligence service.
 
-The system is designed around a simple but meaningful operational scenario:
+## Example Mission Flow
 
-1. the vehicle leaves before the user wakes up
-2. it navigates to a known local restaurant or pickup point
-3. it identifies and acquires tea and food
-4. it returns to the home or delivery point
-5. it delivers the tea and wakes the occupant in a gently timed sequence
-
-This is not just a logistics system; it is a behavior-driven autonomous routine that coordinates mobility, learning, and user experience.
+1. begin pre-dawn mission sequence
+2. read local route and target definitions
+3. query mission intelligence for route confidence and risk state
+4. stabilize and navigate toward restaurant / pickup zone
+5. confirm landing or pickup conditions via vision and sensors
+6. return to home base
+7. deliver order and trigger wake-up sequence
 
 ## Learning and Adaptation
 
-The vehicle is expected to evolve through real-world operation. It learns through a continuous feedback loop:
+Pyv does not rely on perfect assumptions. It continuously learns from:
 
-- actions are taken in the environment
-- outcomes are evaluated for success or failure
-- safety and performance constraints guide future decisions
-- policies improve gradually over repeated missions
+- route success and failure
+- local wind and environmental variation
+- landing-zone confidence
+- target recognition reliability
+- energy and battery constraints
 
-This is an embodied reinforcement-learning approach: the system learns by interacting with the world, not only by static training.
+This helps it adapt over time, becoming more reliable with repeated practice and reinforcement-style correction.
 
-## Why This Platform Matters
+## Relationship with aimodels
 
-A system like Pyv addresses a foundational challenge in autonomous robotics: reliable operation in messy, dynamic, and partially unknown environments. It integrates the real-world constraints of motion, perception, timing, safety, and context-aware decision-making into one architecture.
+The connected mission architecture is:
 
-The result is a functional autonomous design that demonstrates how a small flying vehicle can become adaptive, intelligent, and useful beyond simple remote control or autonomous waypoint travel.
+- Pyv commands the flight platform and hardware behavior
+- aimodels evaluates the environment and makes strategy-aware decisions
+- both participate in a feedback loop that improves performance over time
 
-## Connected Intelligence Layer
+## Future Capability
 
-Pyv is designed to operate alongside the AI Models repository, which provides the learning and decision infrastructure. Together they form a unified system:
+The same architecture can later be expanded toward a more ambitious mission profile: autonomous system deployment in remote or hazardous locations, including material collection and long-duration autonomous operations beyond local delivery.
 
-- Pyv = physical platform, control surfaces, mission execution, and flight hardware
-- aimodels = perception, adaptation, route intelligence, and learning models
+## Project Structure
 
-The software and hardware are therefore not separate efforts; they are complementary layers of the same autonomous system.
-
-## Research Direction
-
-This platform is a foundation for a broader autonomous engineering vision:
-
-- adaptive autonomous delivery
-- environment-aware micro-UAS operation
-- learning-driven navigation
-- integrated edge intelligence
-- autonomous material acquisition for more advanced missions
-
-The same architecture can later be extended to more ambitious missions, including remote or extreme-environment operations.
-
-## Future Vision
-
-The next evolution is not limited to local tea delivery. A future mission profile may include a vehicle capable of traveling independently toward more advanced goals, such as lunar or remote material collection, where the same philosophy of autonomy, adaptation, and learning becomes essential.
+```text
+Pyv/
+├── CMakeLists.txt
+├── include/
+│   └── flight_controller.hpp
+├── src/
+│   ├── flight_controller.cpp
+│   └── main.cpp
+├── README.md
+└── sample.py
+```
 
 ## Summary
 
-Pyv represents a professional-grade concept for a self-learning autonomous flying vehicle that is useful, contextual, and adaptive. It is designed for real operation, meaningful environmental learning, and the long-term idea of intelligent autonomous machines that become more precise with experience.
-
-## Repository Relationship
-
-This project is meant to work in tandem with the AI Models repository to form a complete autonomous intelligence stack: one repository defines the vehicle and mission execution; the other provides the learning and decision engine.
+Pyv is the embodied execution system behind the autonomous tea-delivery mission. It carries the intelligence, stabilizes the vehicle, interprets the environment, responds to uncertainty, and becomes increasingly capable through continuous operational learning.
