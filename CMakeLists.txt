@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(pyv_flight
     src/main.cpp
     src/flight_controller.cpp
+    src/mission_state_machine.cpp
+    src/safety_monitor.cpp
 )
 
 target_include_directories(pyv_flight PRIVATE ${CMAKE_SOURCE_DIR}/include)
