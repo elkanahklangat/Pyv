@@ -1,33 +1,5 @@
 # Learning to build an ML model that adapts to Kenyan lifestyle
 
-my_foods = ['Pizza', 'Ugali', 'Pasta', 'Spaghetti']
-friend_foods = my_foods[:]
-print(f"\n My foods:  {my_foods}")
-print(f"\n My fiend's foods: {friend_foods}")
-# Adding my friend's food list
-friend_foods.append(["Spainach", "Sukuma Wiki"])
-# Adding my food list
-my_foods.append(["Chapati", "Managu"])
-print(f"2: {my_foods} \n 2f: {friend_foods}")
-print("\n\n\n")
-for mfood in my_foods:
-    if mfood in my_foods:
-        print(mfood)
-    else:
-        False
-
-for ffood in friend_foods:
-    if ffood in friend_foods:
-        print(ffood)
-    else:
-        False
-# Checking if certain food is both in my friend]s list and mine
-print("\n\n")
-for ifood in my_foods and friend_foods:
-    if ifood in my_foods and ifood in friend_foods:
-        print(f"{ifood} is both in my food and my friend's food. ")
-    else:
-        False
 # List of local Kenyan jobs
 jobList = [           
            'House Wife', 
@@ -76,3 +48,9 @@ if job in jobList:
     print(f"You will get an employer looking for {job}! Hope for it")
 else:
     print("Seems your job hasn't been updated. ")
+ques = input("Are you really interested in working in hostile environments? How do you descibe your adaptations?")
+quesList = ['I'm on right track', 'All is good', 'I believe I will adapt', Everything is alright', 'My peers keeps motivating me', 'I'm aware of myself']
+if ques in quesList:
+     print("Okay, I see you. Keep moving on At jobList, we keep the effort and thriving for more in innovation!) 
+else:
+    print("Alright, I'l get back to you later")
